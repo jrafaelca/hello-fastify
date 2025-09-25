@@ -1,0 +1,18 @@
+services:
+  fastify:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      APP_PORT: "${APP_PORT:-3000}"
+      APP_HOST: "${APP_HOST:-0.0.0.0}"
+    volumes:
+      - ./src:/app/src
+    networks:
+      - fastify
+
+networks:
+  fastify:
+    driver: bridge
