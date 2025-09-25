@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastify
+  labels:
+    app: fastify
+spec:
+  replicas: 1   # mínimo, luego HPA lo escalará
+  selector:
+    matchLabels:
+      app: fastify
+  template:
+    metadata:
+      labels:
+        app: fastify
+    spec:
+      containers:
+        - name: fastify
+          image: ${APP_IMAGE}
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          envFrom:
+            - secretRef:
+                name: fastify-env   # este es el Secret creado desde tu .env

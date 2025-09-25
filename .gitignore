@@ -29,6 +29,9 @@ jspm_packages/
 .env.*
 !.env.example
 
+# Kubernetes secret files
+k8s/secret.yaml
+
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
